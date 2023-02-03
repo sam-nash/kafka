@@ -1,0 +1,10 @@
+# Ignore folders by just typing the folder name
+node_modules
+local
+
+# Ignore file by providing relative path of the file
+## example : local/*.js
+
+# Ignore filetypes by providing wildcard extension
+## example : *.json
+.DS_Store
