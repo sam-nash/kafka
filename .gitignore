@@ -8,3 +8,4 @@ local
 # Ignore filetypes by providing wildcard extension
 ## example : *.json
 .DS_Store
+.husky

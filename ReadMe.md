@@ -1,55 +1,5 @@
 # KAFKA Basics
 
-## Docker
-
-[Tutorial](https://developer.confluent.io/tutorials/kafka-console-consumer-producer-basics/kafka.html)
-
-Steps to getting started after the pre-requisites are met
-
-1. docker compose up -d
-
-### Create a Topic
-
-`docker exec -t broker kafka-topics --create --topic orders --bootstrap-server broker:9092`
-
-### List topics
-
-```
-docker exec broker \
-kafka-topics --list --bootstrap-server broker:9092
-```
-
-### Write to topic
-
-```
-docker exec --interactive --tty broker \
-kafka-console-producer --bootstrap-server broker:9092 \
-                       --topic orders
-```
-
-### Read from a topic
-
-#### Only the latest messages when the consumer is running
-
-```
-docker exec --interactive --tty broker \
-kafka-console-consumer \
-  --topic orders \
-  --bootstrap-server broker:9092
-
-```
-
-#### All the messages from beginning that were sent to the topic even before the consumer started
-
-```
-docker exec --interactive --tty broker \
-kafka-console-consumer \
-  --topic orders \
-  --bootstrap-server broker:9092
-  --from-beginning
-
-```
-
 ## Local Installation on Mac
 
 [Tutorial](https://www.conduktor.io/kafka/kafka-fundamentals)
@@ -69,7 +19,7 @@ kafka-console-consumer \
 ### Start Apache Kafka
 
 ```
-~/kafka_2.13-3.3.2/bin/kafka-server-start.sh ~/kafka_2.13-3.3.2/config/server.properties
+~/kafka_2.13-3.3.2/bin/kafka-server-start.sh -daemon ~/kafka_2.13-3.3.2/config/server.properties
 ```
 
 ### Topics Operations using CLI
@@ -172,10 +122,60 @@ Partition:1	Offset:8	null	9
 Partition:1	Offset:9	null	10
 Partition:1	Offset:10	null	11
 Partition:1	Offset:11	null
-Partition:2	Offset:0	name	sam
+Partition:2	Offset:0	name	Sam
 ```
 
 > - If the topic does not exist, the console consumer will automatically create it with default.
 > - You can consume multiple topics at a time with a comma-delimited list or a pattern.
 > - If a consumer group id is not specified, the kafka-console-consumer generates a random consumer group
 > - The order in which the messages are received is at the partition level, not at the topic level.
+
+## Docker
+
+[Tutorial](https://developer.confluent.io/tutorials/kafka-console-consumer-producer-basics/kafka.html)
+
+Steps to getting started after the pre-requisites are met
+
+1. docker compose up -d
+
+### Create a Topic
+
+`docker exec -t broker kafka-topics --create --topic orders --bootstrap-server broker:9092`
+
+### List topics
+
+```
+docker exec broker \
+kafka-topics --list --bootstrap-server broker:9092
+```
+
+### Write to topic
+
+```
+docker exec --interactive --tty broker \
+kafka-console-producer --bootstrap-server broker:9092 \
+                       --topic orders
+```
+
+### Read from a topic
+
+#### Only the latest messages when the consumer is running
+
+```
+docker exec --interactive --tty broker \
+kafka-console-consumer \
+  --topic orders \
+  --bootstrap-server broker:9092
+
+```
+
+#### All the messages from beginning that were sent to the topic even before the consumer started
+
+```
+docker exec --interactive --tty broker \
+kafka-console-consumer \
+  --topic orders \
+  --bootstrap-server broker:9092
+  --from-beginning
+
+```
